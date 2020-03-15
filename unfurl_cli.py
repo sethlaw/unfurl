@@ -34,7 +34,7 @@ except:
 unfurl_instance.add_to_queue(
         data_type='url',
 	key=None,
-	extra_options={'widthConstraint': {'maximum': 1200}},
+	extra_options=None,
         value=args.url)
 unfurl_instance.parse_queue()
 
