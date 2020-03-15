@@ -27,6 +27,10 @@ parser.add_argument("--output", help="file.json output to file.json")
 args = parser.parse_args()
 
 unfurl_instance = Unfurl()
+try:
+	unfurl_instance.api_keys = config['API_KEYS']
+except:
+	unfurl_instance.api_keys = { 'bitly': '', 'macaddress_io': '' }
 unfurl_instance.add_to_queue(
         data_type='url',
 	key=None,
@@ -37,9 +41,9 @@ unfurl_instance.parse_queue()
 unfurl_json = unfurl_instance.generate_json()
 ret = ""
 if (args.indent < 1):
-	ret = json.dumps(unfurl_json)
+	ret = json.dumps(unfurl_json["nodes"])
 else: 
-	ret = json.dumps(unfurl_json, indent=args.indent)
+	ret = json.dumps(unfurl_json["nodes"], indent=args.indent)
 
 if (args.output):
 	f = open(args.output,'w')

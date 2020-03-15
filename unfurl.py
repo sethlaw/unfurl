@@ -29,9 +29,9 @@ class Unfurl:
         self.graph = networkx.DiGraph()
         self.total_nodes = 0
 
-        config = configparser.ConfigParser()
-        config.read('unfurl.ini')
-        self.api_keys = config['API_KEYS']
+        #config = configparser.ConfigParser()
+        #config.read('unfurl.ini')
+        #self.api_keys = config['API_KEYS']
 
     class Node:
         def __init__(self, node_id, data_type, key, value, label=None, hover=None, parent_id=None,
@@ -189,7 +189,8 @@ class Unfurl:
 
     def run_plugins(self, node):
 
-        parser_path = os.path.join(os.getcwd(), 'parsers')
+        directory = os.path.abspath(os.path.dirname(__file__))
+        parser_path = os.path.join(directory, 'parsers')
         if os.path.isdir(parser_path):
             sys.path.insert(0, parser_path)
             try:
